@@ -1,0 +1,19 @@
+1.Show database / show dbs
+
+ use youtube if there it take else create it.
+
+ for inserting the data 
+ db.products.insertOne({"name":"pen"})
+
+ 
+2. db.Products.drop()
+   this will delete the collections.
+
+ we need go to the database which we want to delete
+ -> db.dropDatabase()
+
+  db.products.find()
+  for getting the all data.
+
+3. db.products.renameCollection("Items")
+  Renaming the collection name or table name.

@@ -1,0 +1,70 @@
+Mongodb 
+
+1. Create, Print, Delete,Add 
+
+use youtube // create database
+switched to db youtube 
+db.products.insertOne({"name":"Pen"}) // adding value 
+
+
+show collections // like show tables
+
+db.products.drop() // for delete
+
+db.products.find() // print the data from the collections.
+
+
+2.Rename,Delete Db
+
+db.products.renameCollection("Items") // Rename 
+
+databasename db.dropDatabase() // for delete database
+
+
+3.given Multiple collections using [ ]
+
+db.shop.insertOne({"item":"Rice","tags":["food","white"],"stock":{"quantity":150,"uom":"kg"}})
+
+db.shop.insertOne({"_id":1,"item":"sugar"}) // create unique id 
+
+
+db.shop.insertMany([{"_id":2,"item":"orange"},
+    {"_id": 3, "item": "banana"},
+    {"_id": 4, "item": "grape"}]) 
+
+
+4. Dublicate 
+
+
+db.shop.insertMany([{"_id": 5, "item": "kiwi"},
+    {"_id": 2, "item": "mango"},
+    {"_id": 7, "item": "peach"},])
+
+
+->id  2 is already existed so it will insert upto 5.and ignore id 7 
+
+-> db.shop.insertMany([{"_id": 5, "item": "kiwi"},
+    {"_id": 2, "item": "mango"},
+    {"_id": 7, "item": "peach"}],{ordered:false});
+
+-> this will add everything except dublicate id.
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
