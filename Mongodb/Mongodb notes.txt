@@ -38,7 +38,7 @@ db.shop.insertMany([{"_id":2,"item":"orange"},
 
 db.shop.insertMany([{"_id": 5, "item": "kiwi"},
     {"_id": 2, "item": "mango"},
-    {"_id": 7, "item": "peach"},])
+    {"_id": 7, "item": "peach"}])
 
 
 ->id  2 is already existed so it will insert upto 5.and ignore id 7 
@@ -51,7 +51,26 @@ db.shop.insertMany([{"_id": 5, "item": "kiwi"},
 
 
 
+5. Like Select querry 
 
+
+  https://www.tutorjoes.in/mongodb_tutorial/query_methods for sample querry
+
+  db.products.find({"brand":"oneplus"})
+
+  db.products.find({"brand":{$in:["apple","realme"]}})
+
+
+  
+
+6. Using condition
+
+   db.products.find({"category":"mobile","qty":{$lt:20}}) // category and  qty both true only it will execute.
+
+   // lt means less than and gt means greater than
+    
+
+   
 
 
 
