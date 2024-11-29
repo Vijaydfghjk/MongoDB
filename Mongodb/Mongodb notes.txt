@@ -51,7 +51,7 @@ db.shop.insertMany([{"_id": 5, "item": "kiwi"},
 
 
 
-5. Like Select querry 
+5. Like Select querry  or Filtering
 
 
   https://www.tutorjoes.in/mongodb_tutorial/query_methods for sample querry
@@ -60,17 +60,43 @@ db.shop.insertMany([{"_id": 5, "item": "kiwi"},
 
   db.products.find({"brand":{$in:["apple","realme"]}})
 
+   db.products.find({_id:ObjectId('67492818aeba4898aa4aba34')})
+   
 
-  
-
-6. Using condition
+6. Using condition 
 
    db.products.find({"category":"mobile","qty":{$lt:20}}) // category and  qty both true only it will execute.
 
+   db.products.find({age:{$gt:25}})
+
    // lt means less than and gt means greater than
-    
+
+7. Using Update_one for update only one document
+
+
+  db.products.updateOne({_id: ObjectId('67492956aeba4898aa4aba37')},{$set:{"name":"Vijay"}})
+
+  db.products.updateone({filter_part},{$set:{"place":"update_value"}})
+
+  db.products.updateMany({"name":"Moto"},{$set:{"name":"LG"}})
+
+
+  db.products.updateMany({$or:[{_id: ObjectId('67492956aeba4898aa4aba38')},{_id: ObjectId('67492956aeba4898aa4aba39')}]},{$set:{"age":25}})
+
 
    
+
+     
+
+   
+
+  
+
+ 
+
+  
+
+
 
 
 
