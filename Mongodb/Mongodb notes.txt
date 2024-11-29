@@ -81,7 +81,16 @@ db.shop.insertMany([{"_id": 5, "item": "kiwi"},
   db.products.updateMany({"name":"Moto"},{$set:{"name":"LG"}})
 
 
-  db.products.updateMany({$or:[{_id: ObjectId('67492956aeba4898aa4aba38')},{_id: ObjectId('67492956aeba4898aa4aba39')}]},{$set:{"age":25}})
+  db.products.updateMany(
+{$or:[
+
+{_id: ObjectId('67492956aeba4898aa4aba38')},{_id: ObjectId('67492956aeba4898aa4aba39')}
+
+]},
+
+  {$set:{"age":25}}
+
+)
 
 
    
