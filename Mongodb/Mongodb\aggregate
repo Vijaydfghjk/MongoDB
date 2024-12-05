@@ -24,3 +24,26 @@ db.collection.update(
   { _id: ObjectId('6751be77ec15d0bd703f6bc8') },  // Query to find the document by _id
   { $unset: { qty: "" } }  // Remove the 'qty' field
 )
+
+
+4. convert the string to int to the entire document
+
+  db.orders.updateMany({quantity:{$type :"string"}},[{$set:{quantity:{$toInt:"$quantity"}}}])
+
+
+5. MongoDB aggregation pipeline performs the following steps
+
+  $match: Filters the documents to include only those where the size field is 'medium'.
+
+  This means it selects all orders where the pizza size is medium.
+
+  $group: Groups the filtered documents by the name field (which represents the pizza type). It creates an object with:
+
+  _id: A new field that groups documents by the name field (the pizza name).
+  total: A count of the number of occurrences of each pizza type (using $sum: 1, which adds 1 for each document in the group).
+  Totalquantity: The sum of the quantity field for each pizza type (using $sum: '$quantity', which adds up the values of the quantity field).
+
+db.orders.aggregate([{$match:{size:'medium'}},{$group:{_id:{pizza:'$name'},total:{$sum:1},Totalquantity:{$sum:'$quantity'}}}])
+
+
+
