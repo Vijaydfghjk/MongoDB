@@ -1,1 +1,26 @@
+1.  
+   using Match
+   db.sale.aggregate([{$match :{item:'apple'}}])
 
+   This will return the apple across the document
+
+2.  
+
+   db.orders.aggregate([{$match:{size:'medium'}},{$group:{_id:"$name",total:{$sum:1}}}])
+
+   match : fileter the medium categorey 
+
+   $group:{_id:"$name" in document take the name field and then total the sum 
+
+
+3. Delete field.
+
+ remove the entire collection
+ db.orders.updateMany({},{$unset:{qty:1}})
+
+
+remove the particular id
+db.collection.update(
+  { _id: ObjectId('6751be77ec15d0bd703f6bc8') },  // Query to find the document by _id
+  { $unset: { qty: "" } }  // Remove the 'qty' field
+)
