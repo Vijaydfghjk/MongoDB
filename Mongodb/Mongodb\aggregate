@@ -31,7 +31,13 @@ db.collection.update(
   db.orders.updateMany({quantity:{$type :"string"}},[{$set:{quantity:{$toInt:"$quantity"}}}])
 
 
-5. MongoDB aggregation pipeline performs the following steps
+5. In a collection filter the pizza and count the each category 
+
+   db.orders.aggregate({$group:{_id:"$name",totalqty:{$sum:"$quantity"}}})
+
+
+
+6.. MongoDB aggregation pipeline performs the following steps
 
   $match: Filters the documents to include only those where the size field is 'medium'.
 
