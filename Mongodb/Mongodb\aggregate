@@ -52,4 +52,27 @@ db.collection.update(
 db.orders.aggregate([{$match:{size:'medium'}},{$group:{_id:{pizza:'$name'},total:{$sum:1},Totalquantity:{$sum:'$quantity'}}}])
 
 
+7.
+
+db.food.aggregate([
+  { $match: { type: "Italian" } },
+  { $sort: { price: -1 } },
+  { $project: { _id: 0, name: 1, type: 1, price: 1 } }
+])
+
+
+
+
+8.  tacking the first 4 records
+
+ db.food.aggregate([
+
+  {$group:{_id:null,total_count:{$sum:1},data:{$push:"$$ROOT"}}},
+  {$project:{_id:0,total_count:1,food_item:{$slice:["$data",0,4]}}}
+])
+  
+
+
+
+
 
