@@ -1,0 +1,53 @@
+From Mydb database
+
+
+1 .orderItems 
+
+db.orderItems.insertMany([
+  { _id: 1, orderId: 101, item: "Pizza", quantity: 2 },
+  { _id: 2, orderId: 101, item: "Coke", quantity: 3 },
+  { _id: 3, orderId: 102, item: "Burger", quantity: 1 },
+  { _id: 4, orderId: 103, item: "Pasta", quantity: 1 },
+  { _id: 5, orderId: 104, item: "Salad", quantity: 2 }
+]);
+
+2. orders 
+
+db.orders.insertMany([
+  { _id: 101, tableId: "T1", total: 500 },
+  { _id: 102, tableId: "T2", total: 300 },
+  { _id: 103, tableId: "T3", total: 200 },
+  { _id: 104, tableId: "T1", total: 150 }
+]);
+
+3. Tables
+
+db.tables.insertMany([
+  { _id: "T1", tableName: "Table 1", seats: 4 },
+  { _id: "T2", tableName: "Table 2", seats: 2 },
+  { _id: "T3", tableName: "Table 3", seats: 6 }
+]);
+
+Querry
+
+Filter the match 
+
+db.orderItems.aggregate([
+  { $match: { quantity: { $gte: 2 } } }
+]);
+
+filter the data greater than or equal 
+
+Using $lookup
+
+db.orderItems.aggregate([
+  { 
+    $lookup: {
+      from: "orders",
+      localField: "orderId",
+      foreignField: "_id",
+      as: "orderDetails"
+    }
+  }
+]);
+
