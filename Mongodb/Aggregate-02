@@ -68,3 +68,26 @@ db.orderItems.aggregate([
 using unwind - > Breaks the orderDetails array into individual documents.
 
 
+Multi-level $lookup and $unwind: Join with tables after orders
+
+
+db.orderItems.aggregate([
+  {
+    $lookup: {
+      from: "orders",
+      localField: "orderId",
+      foreignField: "_id",
+      as: "orderDetails"
+    }
+  },
+  { $unwind: "$orderDetails" },
+  {
+    $lookup: {
+      from: "tables",
+      localField: "orderDetails.tableId",
+      foreignField: "_id",
+      as: "tableDetails"
+    }
+  },
+  { $unwind: "$tableDetails" }
+]);
