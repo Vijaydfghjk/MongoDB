@@ -30,7 +30,7 @@ db.tables.insertMany([
 
 Querry
 
-Filter the match 
+Filter the match ******
 
 db.orderItems.aggregate([
   { $match: { quantity: { $gte: 2 } } }
@@ -38,7 +38,7 @@ db.orderItems.aggregate([
 
 filter the data greater than or equal 
 
-Using $lookup
+Using $lookup ******
 
 db.orderItems.aggregate([
   { 
@@ -50,4 +50,21 @@ db.orderItems.aggregate([
     }
   }
 ]);
+
+Using the $unwind
+
+db.orderItems.aggregate([
+  {
+    $lookup: {
+      from: "orders",
+      localField: "orderId",
+      foreignField: "_id",
+      as: "orderDetails"
+    }
+  },
+  { $unwind: "$orderDetails" }
+]);
+
+using unwind - > Breaks the orderDetails array into individual documents.
+
 
