@@ -91,3 +91,30 @@ db.orderItems.aggregate([
   },
   { $unwind: "$tableDetails" }
 ]);
+
+
+$project Stage: Project selected fields
+
+
+
+
+db.orderItems.aggregate([
+  {
+    $lookup: {
+      from: "orders",
+      localField: "orderId",
+      foreignField: "_id",
+      as: "orderDetails"
+    }
+  },
+  { $unwind: "$orderDetails" },
+  {
+    $project: {
+      _id: 0,
+      item: 1,
+      quantity: 1,
+      orderTotal: "$orderDetails.total",
+      tableId: "$orderDetails.tableId"
+    }
+  }
+]);
