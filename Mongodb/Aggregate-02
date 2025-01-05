@@ -118,3 +118,32 @@ db.orderItems.aggregate([
     }
   }
 ]);
+
+
+
+
+Next_Level 
+
+using Mtach with multiple values and group
+
+db.tables.aggregate([
+
+  {
+ 
+   $match:{
+
+      Rooms:{$in:["Rooms","Premimum"]}
+     }
+
+  },
+  
+  {
+  $group:{
+            _id:"$Rooms",Total_seats:{$sum:"$seats"}
+       }
+  }
+
+    
+])
+
+
