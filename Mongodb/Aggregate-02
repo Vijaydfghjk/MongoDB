@@ -146,4 +146,111 @@ db.tables.aggregate([
     
 ])
 
+ join operation between two collections  
+
+What Data Are We Getting?
+From orderItems:
+
+orderId: The ID of the order.
+item: The item associated with this order.
+quantity: The quantity of the item in the order.
+From orders (joined into Order_items):
+
+tableId: The ID of the table associated with the order.
+total: The total price of the order.
+
+
+db.orderItems.aggregate([
+
+  {
+
+   $lookup:{
+ 
+           from :"orders",
+        localField:"orderId",
+        foreignField:"_id",
+        as :"order_items"
+
+      }
+
+  },
+
+  {$unwind:"$order_items"},
+
+  {
+    $addFields:{
+ 
+           order_items:{
+             tableId:"$order_items.tableId",
+             total:"$order_items.total"
+              }
+        
+         }
+ 
+  },
+
+  {
+  
+   $project :{
+           _id:0,
+           orderId:1,
+           item:1,
+           quantity:1,
+           "order_items.tableId":1,
+            "order_items.total":1  
+
+     }
+
+
+   }
+
+])
+{
+  orderId: 101,
+  item: 'Pizza',
+  quantity: 2,
+  order_items: {
+    tableId: 'T1',
+    total: 500
+  }
+}
+{
+  orderId: 101,
+  item: 'Coke',
+  quantity: 3,
+  order_items: {
+    tableId: 'T1',
+    total: 500
+  }
+}
+{
+  orderId: 102,
+  item: 'Burger',
+  quantity: 1,
+  order_items: {
+    tableId: 'T2',
+    total: 300
+  }
+}
+{
+  orderId: 103,
+  item: 'Pasta',
+  quantity: 1,
+  order_items: {
+    tableId: 'T3',
+    total: 200
+  }
+}
+{
+  orderId: 104,
+  item: 'Salad',
+  quantity: 2,
+  order_items: {
+    tableId: 'T1',
+    total: 150
+  }
+}
+mydb
+Selection deleted
+
 
